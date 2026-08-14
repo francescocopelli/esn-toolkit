@@ -1,69 +1,84 @@
 # ESN Toolkit
 
-Chrome extension per la **verifica delle partnership ESN** e il **controllo delle ESNcard**.
+Estensione Chrome per la verifica delle partnership ESN e il controllo delle ESNcard.
 
-Strumento indipendente sviluppato per ESN Pisa. Non è un prodotto ufficiale di ESN International.
+Sviluppato da [Francesco Copelli](https://github.com/francescocopelli) per ESN Pisa.
+
+> ESN Toolkit è uno strumento indipendente e non è un prodotto ufficiale di ESN International.
 
 ---
 
 ## Funzionalità
 
-- Verifica partnership per singola sezione o per tutte le sezioni
+- Conteggio partnership per singola sezione o per tutte le sezioni configurate
 - Filtro partnership in base alla Data PN
-- Esclusione e badge visivo per partnership scadute
-- Progress bar con ripresa dopo chiusura del popup
+- Esclusione delle partnership scadute prima dell'inizio della PN
+- Badge visivo per partnership attive (`ATTIVA`) e scadute (`SCADUTA`)
+- Supporto formato `valid until.value` restituito da esncard.org
+- Verifica ESNcard con risposta strutturata
+- Progress bar per verifiche multiple
+- Ripresa del progresso dopo chiusura del popup
 - Pausa configurabile tra le sezioni (30 secondi)
-- Verifica codice ESNcard
 - Copia risultati negli appunti
-- Pagina Opzioni per configurare le sezioni
+- Pagina Opzioni completa
+- Manifest V3
 
 ---
 
 ## Installazione
 
-### Da GitHub Releases (consigliato)
+Vedi [INSTALL.md](INSTALL.md) per la procedura completa.
 
-1. Vai alla pagina [Releases](https://github.com/francescocopelli/esn-toolkit/releases)
-2. Scarica l'ultimo file `esn-toolkit-vX.X.X.zip`
-3. Estrai il file ZIP in una cartella
-4. Apri Chrome e vai su `chrome://extensions`
-5. Attiva **Modalità sviluppatore** (in alto a destra)
-6. Clicca **Carica estensione non pacchettizzata**
-7. Seleziona la cartella estratta
+---
 
-### Da codice sorgente
+## Struttura del progetto
 
-```bash
-git clone https://github.com/francescocopelli/esn-toolkit.git
+```
+esn-toolkit/
+├── manifest.json
+├── background.js
+├── popup.html
+├── popup.js
+├── options.html
+├── options.js
+└── icons/
+    ├── esn-16.png
+    ├── esn-32.png
+    ├── esn-48.png
+    └── esn-128.png
 ```
 
-Poi segui i passi 4-7 precedenti selezionando la cartella `esn-toolkit`.
+---
+
+## Requisiti
+
+- Google Chrome (o browser basato su Chromium)
+- Sessione autenticata attiva su [esncard.org](https://esncard.org)
+
+L'estensione utilizza la sessione autenticata dell'utente su esncard.org per leggere le risposte degli endpoint ESN. Non memorizza né trasmette credenziali.
 
 ---
 
-## Utilizzo
+## Permessi
 
-1. Apri `esncard.org` nel browser ed effettua il login
-2. Apri il popup dell'estensione
-3. Inserisci la **Data PN** nel formato `gg/mm/aa, hh:mm`
-4. Seleziona il **Tipo controllo**
-5. Clicca **Verifica sezione** (singola) o **Verifica tutte** (tutte le sezioni configurate)
-
----
-
-## Configurazione sezioni
-
-Nella pagina **Opzioni** puoi configurare le sezioni da verificare.
-L'elenco delle sezioni italiane è già precaricato di default.
+| Permesso | Utilizzo |
+|---|---|
+| `storage` | Salvataggio impostazioni e stato verifiche in locale |
+| `tabs` | Individuazione tab attiva su esncard.org |
+| `scripting` | Esecuzione richieste nel contesto della sessione autenticata |
+| `clipboardWrite` | Copia risultati negli appunti su richiesta dell'utente |
+| `https://esncard.org/*` | Accesso agli endpoint partnership e ESNcard |
 
 ---
 
-## Sviluppato da
+## Versioni
 
-[Francesco Copelli](https://github.com/francescocopelli) — ESN Pisa
+| Versione | Note |
+|---|---|
+| 2.0.0 | Prima release pubblica. Manifest V3, filtro scadenze, badge visivi, copia risultati. |
 
 ---
 
 ## Licenza
 
-MIT
+Distribuito per uso interno ESN. Non redistribuire senza autorizzazione.

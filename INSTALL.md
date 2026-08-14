@@ -1,62 +1,92 @@
-# Guida all'installazione
+# Installazione di ESN Toolkit
 
-## 1. Scarica l'estensione
+## Download
 
-Vai alla pagina delle release:
+Scarica l'ultima versione dalla pagina delle release:
 
-https://github.com/francescocopelli/esn-toolkit/releases
+👉 **[Scarica ESN Toolkit v2.0.0](https://github.com/francescocopelli/esn-toolkit/releases/latest)**
 
-Scarica il file `esn-toolkit-vX.X.X.zip` dall'ultima release disponibile.
+Clicca su `esn-toolkit-v2.0.0.zip` sotto la sezione **Assets**.
 
-## 2. Estrai il file ZIP
+---
 
-Estrai il contenuto del file ZIP in una cartella sul tuo computer, ad esempio:
+## Procedura di installazione
 
-```
-Documenti/esn-toolkit/
-```
+### 1. Estrai lo ZIP
 
-## 3. Apri la pagina delle estensioni Chrome
+Estrai il file scaricato in una cartella permanente sul tuo computer.
 
-Digita nella barra degli indirizzi:
+> ⚠️ Non eliminare la cartella dopo l'installazione: Chrome la legge ogni volta che apri il browser.
+
+### 2. Apri la pagina delle estensioni
+
+Nella barra indirizzi di Chrome digita:
 
 ```
 chrome://extensions
 ```
 
-## 4. Attiva la Modalità sviluppatore
+### 3. Attiva la Modalità sviluppatore
 
-In alto a destra nella pagina, attiva il toggle:
+In alto a destra trovi il toggle **Modalità sviluppatore**. Attivalo.
 
-```
-Modalità sviluppatore
-```
+### 4. Carica l'estensione
 
-## 5. Carica l'estensione
+Clicca **Carica estensione non pacchettizzata** e seleziona la cartella estratta dallo ZIP.
 
-Clicca il pulsante:
+La cartella deve contenere direttamente `manifest.json` nella radice.
 
-```
-Carica estensione non pacchettizzata
-```
+### 5. Verifica l'installazione
 
-Seleziona la cartella estratta al passo 2.
-Assicurati di selezionare la cartella che contiene `manifest.json`.
+Nella barra degli strumenti di Chrome dovresti vedere l'icona di ESN Toolkit.
 
-## 6. Verifica l'installazione
+---
 
-L'icona di ESN Toolkit deve apparire nella barra degli strumenti di Chrome.
-Se non la vedi, clicca sull'icona a forma di puzzle e fissa ESN Toolkit.
+## Prima configurazione
 
-## 7. Prima configurazione
+1. Apri **esncard.org** nel browser e accedi con il tuo account.
+2. Clicca sull'icona di ESN Toolkit nella barra degli strumenti.
+3. Clicca su **Opzioni** per configurare le sezioni da verificare.
+4. Inserisci i codici delle sezioni (es. `IT-PISA-ESN`), uno per riga.
+5. Salva le impostazioni.
 
-1. Clicca sull'icona dell'estensione
-2. Clicca **⚙ Opzioni** in alto a destra
-3. Verifica o aggiorna la lista delle sezioni
-4. Clicca **Salva**
+---
+
+## Aggiornamento
+
+Per aggiornare a una nuova versione:
+
+1. Scarica il nuovo ZIP dalla [pagina delle release](https://github.com/francescocopelli/esn-toolkit/releases/latest).
+2. Estrai il contenuto **sovrascrivendo** la cartella esistente.
+3. Apri `chrome://extensions`.
+4. Trova ESN Toolkit e clicca **Aggiorna** (⟳) oppure disabilita e riabilita l'estensione.
+
+---
+
+## Risoluzione problemi
+
+### L'estensione non risponde
+
+Assicurati di avere una scheda di esncard.org aperta e di essere autenticato.
+
+### Errore "Nessuna tab attiva su esncard.org"
+
+Apri esncard.org in una scheda e riprova.
+
+### Le partnership mostrano 0 risultati
+
+- Verifica che la Data PN sia corretta.
+- Controlla che le sezioni in Opzioni abbiano il formato corretto (`IT-XXXX-XXX`).
+- Verifica di essere autenticato su esncard.org.
+
+### La cartella è stata spostata o eliminata
+
+Ripeti la procedura di installazione dal punto 4 con la nuova posizione della cartella.
+
+---
 
 ## Note
 
-- Devi avere una scheda aperta su `esncard.org` ed essere loggato
-- La Modalità sviluppatore deve rimanere attiva per le estensioni non pacchettizzate
-- In caso di aggiornamenti, scarica il nuovo ZIP e sostituisci la cartella precedente
+- La Modalità sviluppatore deve rimanere attiva.
+- Al primo avvio dopo l'installazione Chrome potrebbe mostrare un avviso: clicca **Mantieni** o **Conserva estensione**.
+- ESN Toolkit è uno strumento indipendente e non è un prodotto ufficiale di ESN International.
