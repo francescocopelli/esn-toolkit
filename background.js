@@ -1,5 +1,5 @@
 const ESNCARD_ORIGIN = "https://esncard.org";
-const PARTNERSHIP_DELAY_MS = 30 * 1000;
+const PARTNERSHIP_DELAY_MS = 0.5 * 1000;
 const PARTNERSHIP_PROGRESS_KEY = "partnershipProgress";
 
 function buildCardUrl(code) {

@@ -121,8 +121,8 @@ function renderSingleResult(outcome) {
   row.innerHTML = `
     <span class="result-section">${outcome.section}</span>
     <span class="result-count">${count}/${total}</span>
-    <span class="badge ${badgeClass}">${count === 0 ? "ZERO" : count < total ? "PARZIALE" : "OK"}</span>
-  `;
+    `;
+  // <span class="badge ${badgeClass}">${count === 0 ? "ZERO" : count < total ? "PARZIALE" : "OK"}</span>
   resultsBox.appendChild(row);
 
   for (const p of included) {
@@ -199,10 +199,13 @@ function renderAllResults(results) {
     const label = count === 0 ? "ZERO" : count < total ? "PARZIALE" : "OK";
 
     row.innerHTML = `
-      <span class="result-section">${outcome.section}</span>
+      <span class="result-section">
+      <a href="https://esncard.org/services/1.0/discounts.json?code=${outcome.section}" target="_blank" rel="noopener noreferrer">
+      ${outcome.section}
+      </a>
+      </span>
       <span class="result-count">${count}/${total}</span>
-      <span class="badge ${badgeClass}">${label}</span>
-      ${expired > 0 ? `<span class="badge badge-expired">${expired} scadute</span>` : ""}
+      ${expired > 0 ? `<span class="badge badge-expired">${expired} scadute</span>` : "<span class='badge badge-expired'>Nessuna scaduta</span>"}
     `;
     resultsBox.appendChild(row);
   }
@@ -336,7 +339,7 @@ btnCheckCard.addEventListener("click", () => {
 
 function getCardStatusBadge(status) {
   switch (String(status).toLowerCase()) {
-    case "active":   return `<span class="badge badge-ok">ATTIVA</span>`;
+    case "active": return `<span class="badge badge-ok">ATTIVA</span>`;
     case "inactive": return `<span class="badge badge-expired">INATTIVA</span>`;
     case "available": return `<span class="badge badge-warning">DISPONIBILE</span>`;
     default: return `<span class="badge badge-error">${status || "N/D"}</span>`;
@@ -399,13 +402,7 @@ function formatPartnershipResultsForClipboard(results) {
     ? formatDateTime(parseDateValue(pnDateInput.value))
     : "-";
 
-  const lines = [
-    "ESN Toolkit - Verifica partnership",
-    `Data PN: ${pnDate}`,
-    `Tipo controllo: ${getVerificationLabel()}`,
-    `Data esportazione: ${new Date().toLocaleString("it-IT")}`,
-    ""
-  ];
+  const lines = [];
 
   for (const outcome of results) {
     if (!outcome || !outcome.ok) {
@@ -415,7 +412,8 @@ function formatPartnershipResultsForClipboard(results) {
     const count = typeof outcome.result?.count === "number" ? outcome.result.count : 0;
     const total = typeof outcome.result?.total === "number" ? outcome.result.total : count;
     const excluded = Array.isArray(outcome.result?.excluded) ? outcome.result.excluded.length : 0;
-    lines.push(`${outcome.section}: ${count} partnership valide su ${total}; ${excluded} scadute escluse`);
+    // lines.push(`${outcome.section}: ${count} partnership valide su ${total}; ${excluded} scadute escluse`);
+    lines.push(count);
   }
 
   return lines.join("\n");

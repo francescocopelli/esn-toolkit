@@ -2,7 +2,7 @@
 
 Estensione Chrome per la verifica delle partnership ESN e il controllo delle ESNcard.
 
-Sviluppato da [Francesco Copelli](https://github.com/francescocopelli) per ESN Pisa.
+Sviluppato da [Francesco Copelli](https://github.com/francescocopelli) per ESN Italia.
 
 > ESN Toolkit è uno strumento indipendente e non è un prodotto ufficiale di ESN International.
 

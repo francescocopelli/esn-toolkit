@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ESN Toolkit",
   "version": "2.0.1",
-  "description": "Chrome extension per la verifica delle partnership ESN e delle ESNcard. Strumento indipendente sviluppato per ESN Pisa.",
+  "description": "Chrome extension per la verifica delle partnership ESN e delle ESNcard. Strumento indipendente sviluppato per ESN Italia.",
   "action": {
     "default_popup": "popup.html",
     "default_title": "ESN Toolkit",
