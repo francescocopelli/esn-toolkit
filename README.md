@@ -80,6 +80,8 @@ L'estensione utilizza la sessione autenticata dell'utente su esncard.org per leg
 | Versione | Note |
 |---|---|
 | 2.0.0 | Prima release pubblica. Manifest V3, filtro scadenze, badge visivi, copia risultati. |
+| 2.0.1 | Aggiornamenti intermedi. |
+| 2.0.2 | Fix gestione risposta array API ESNcard, lettura campi reali API, formattazione date italiana, badge stati ATTIVA/INATTIVA/DISPONIBILE. Palette aggiornata secondo Visual Identity Manual ESN, bottone ESN Magenta, aggiunta icona estensione. |
 
 ---
 
