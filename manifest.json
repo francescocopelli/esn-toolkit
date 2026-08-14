@@ -7,10 +7,10 @@
     "default_popup": "popup.html",
     "default_title": "ESN Toolkit",
     "default_icon": {
-      "16": "icons/esn-16.png",
-      "32": "icons/esn-32.png",
-      "48": "icons/esn-48.png",
-      "128": "icons/esn-128.png"
+      "16": "icons/esn-logo.png",
+      "32": "icons/esn-logo.png",
+      "48": "icons/esn-logo.png",
+      "128": "icons/esn-logo.png"
     }
   },
   "options_page": "options.html",
@@ -27,9 +27,9 @@
     "https://esncard.org/*"
   ],
   "icons": {
-    "16": "icons/esn-16.png",
-    "32": "icons/esn-32.png",
-    "48": "icons/esn-48.png",
-    "128": "icons/esn-128.png"
+    "16": "icons/esn-logo.png",
+    "32": "icons/esn-logo.png",
+    "48": "icons/esn-logo.png",
+    "128": "icons/esn-logo.png"
   }
 }
