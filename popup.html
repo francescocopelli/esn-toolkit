@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESN Toolkit</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      background: #f8fafc;
+      color: #1e293b;
+      width: 420px;
+      min-height: 300px;
+    }
+    .header {
+      background: #003882;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
+    .header a {
+      color: #fff;
+      font-size: 11px;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .header a:hover { opacity: 1; }
+    .tabs {
+      display: flex;
+      background: #e2e8f0;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .tab {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      transition: all 0.15s;
+    }
+    .tab.active {
+      background: #fff;
+      color: #003882;
+      border-bottom: 2px solid #003882;
+    }
+    .tab-panel { display: none; padding: 14px 16px; }
+    .tab-panel.active { display: block; }
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; color: #475569; margin-bottom: 4px; }
+    .field input, .field select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      font-size: 12px;
+      background: #fff;
+      color: #1e293b;
+    }
+    .field input:focus, .field select:focus {
+      outline: none;
+      border-color: #003882;
+    }
+    .row { display: flex; gap: 8px; }
+    .row .field { flex: 1; }
+    .btn {
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: #003882; color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #002a6a; }
+    .btn-secondary { background: #e2e8f0; color: #475569; }
+    .btn-secondary:hover:not(:disabled) { background: #cbd5e1; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-row { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-row .btn { flex: 1; }
+    .progress-wrap {
+      margin-top: 10px;
+      display: none;
+    }
+    .progress-wrap.visible { display: block; }
+    .progress-bar-bg {
+      background: #e2e8f0;
+      border-radius: 4px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #003882;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .progress-label { font-size: 10px; color: #64748b; }
+    .results-box {
+      margin-top: 10px;
+      max-height: 220px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      background: #fff;
+    }
+    .result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 8px;
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-section {
+      font-weight: 600;
+      font-size: 11px;
+      color: #003882;
+      min-width: 100px;
+    }
+    .result-count {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .badge-ok { background: #dcfce7; color: #166534; }
+    .badge-warning { background: #fef9c3; color: #854d0e; }
+    .badge-error { background: #fee2e2; color: #991b1b; }
+    .badge-expired { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+    .badge-zero { background: #fee2e2; color: #991b1b; }
+    .status-msg {
+      font-size: 11px;
+      color: #475569;
+      margin-top: 6px;
+      min-height: 16px;
+    }
+    .status-msg.error { color: #dc2626; }
+    .status-msg.success { color: #16a34a; }
+    .card-result {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      background: #fff;
+      font-size: 11px;
+      display: none;
+    }
+    .card-result.visible { display: block; }
+    .card-field { margin-bottom: 6px; }
+    .card-field span:first-child { font-weight: 600; color: #475569; }
+    .card-field span:last-child { color: #1e293b; margin-left: 4px; }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .expired-detail {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    footer.credits {
+      margin-top: 14px;
+      padding-top: 8px;
+      border-top: 1px solid #e5e7eb;
+      color: #94a3b8;
+      font-size: 10px;
+      text-align: center;
+    }
+    footer.credits a { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ESN Toolkit</h1>
+    <a id="optionsLink" href="#">⚙ Opzioni</a>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="partnerships">Partnership</button>
+    <button class="tab" data-tab="esncard">ESNcard</button>
+  </div>
+
+  <!-- TAB PARTNERSHIP -->
+  <div class="tab-panel active" id="tab-partnerships">
+    <div class="row">
+      <div class="field">
+        <label for="pnDate">Data PN</label>
+        <input type="text" id="pnDate" placeholder="gg/mm/aa, hh:mm">
+      </div>
+      <div class="field">
+        <label for="verificationType">Tipo controllo</label>
+        <select id="verificationType">
+          <option value="all">Tutti</option>
+          <option value="30d" selected>30 giorni prima</option>
+          <option value="10d">10 giorni prima</option>
+          <option value="48h">48 ore prima</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="sectionInput">Codice sezione (singola verifica)</label>
+      <input type="text" id="sectionInput" placeholder="es. IT-PISA-ESN">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnSingle">Verifica sezione</button>
+      <button class="btn btn-secondary" id="btnAll">Verifica tutte</button>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel"></div>
+    </div>
+
+    <div class="status-msg" id="statusMsg"></div>
+
+    <div class="results-box" id="resultsBox" style="display:none"></div>
+
+    <div class="btn-row" id="copyRow" style="display:none">
+      <button class="btn btn-secondary" id="btnCopy">📋 Copia risultati</button>
+      <button class="btn btn-secondary" id="btnClear">✕ Pulisci</button>
+    </div>
+
+    <footer class="credits">
+      ESN Toolkit · Sviluppato da
+      <a id="creditsLink" href="https://github.com/francescocopelli">Francesco Copelli</a>
+      · ESN Pisa
+    </footer>
+  </div>
+
+  <!-- TAB ESNCARD -->
+  <div class="tab-panel" id="tab-esncard">
+    <div class="field">
+      <label for="cardCode">Codice ESNcard</label>
+      <input type="text" id="cardCode" placeholder="es. IT-PISA-2024-12345">
+    </div>
+    <button class="btn btn-primary" id="btnCheckCard">Verifica ESNcard</button>
+    <div class="status-msg" id="cardStatusMsg"></div>
+    <div class="card-result" id="cardResult"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

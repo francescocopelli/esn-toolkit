@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "ESN Toolkit",
+  "version": "2.0.0",
+  "description": "Chrome extension per la verifica delle partnership ESN e delle ESNcard. Strumento indipendente sviluppato per ESN Pisa.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ESN Toolkit",
+    "default_icon": {
+      "16": "icons/esn-16.png",
+      "32": "icons/esn-32.png",
+      "48": "icons/esn-48.png",
+      "128": "icons/esn-128.png"
+    }
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://esncard.org/*"
+  ],
+  "icons": {
+    "16": "icons/esn-16.png",
+    "32": "icons/esn-32.png",
+    "48": "icons/esn-48.png",
+    "128": "icons/esn-128.png"
+  }
+}
