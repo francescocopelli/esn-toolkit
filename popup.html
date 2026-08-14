@@ -15,6 +15,7 @@
       --esn-green:      #7ac143;
       --esn-orange:     #f47b20;
       --esn-magenta:    #ec008c;
+      --esn-magenta-hover: #c4006f;
     }
 
     body {
@@ -94,6 +95,8 @@
     }
     .btn-primary { background: var(--esn-dark-blue); color: #fff; }
     .btn-primary:hover:not(:disabled) { background: var(--esn-dark-blue-hover); }
+    .btn-magenta { background: var(--esn-magenta); color: #fff; }
+    .btn-magenta:hover:not(:disabled) { background: var(--esn-magenta-hover); }
     .btn-secondary { background: #e2e8f0; color: #475569; }
     .btn-secondary:hover:not(:disabled) { background: #cbd5e1; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -236,7 +239,7 @@
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-primary" id="btnSingle">Verifica sezione</button>
+      <button class="btn btn-magenta" id="btnSingle">Verifica sezione</button>
       <button class="btn btn-secondary" id="btnAll">Verifica tutte</button>
     </div>
 
