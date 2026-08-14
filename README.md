@@ -1,5 +1,7 @@
 # ESN Toolkit
 
+[![Latest Release](https://img.shields.io/github/v/release/francescocopelli/esn-toolkit?label=latest%20release)](https://github.com/francescocopelli/esn-toolkit/releases)
+
 Estensione Chrome per la verifica delle partnership ESN e il controllo delle ESNcard.
 
 Sviluppato da [Francesco Copelli](https://github.com/francescocopelli) per ESN Italia.
@@ -28,6 +30,8 @@ Sviluppato da [Francesco Copelli](https://github.com/francescocopelli) per ESN I
 ## Installazione
 
 Vedi [INSTALL.md](INSTALL.md) per la procedura completa.
+
+Le versioni disponibili e i relativi file ZIP sono scaricabili dalla pagina [Releases](https://github.com/francescocopelli/esn-toolkit/releases).
 
 ---
 
