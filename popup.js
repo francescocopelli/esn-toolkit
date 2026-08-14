@@ -334,6 +334,15 @@ btnCheckCard.addEventListener("click", () => {
   port.postMessage({ type: "CHECK_CARD", code });
 });
 
+function getCardStatusBadge(status) {
+  switch (String(status).toLowerCase()) {
+    case "active":   return `<span class="badge badge-ok">ATTIVA</span>`;
+    case "inactive": return `<span class="badge badge-expired">INATTIVA</span>`;
+    case "available": return `<span class="badge badge-warning">DISPONIBILE</span>`;
+    default: return `<span class="badge badge-error">${status || "N/D"}</span>`;
+  }
+}
+
 function renderCardResult(result) {
   cardResult.innerHTML = "";
   if (!result || !result.ok) {
@@ -346,19 +355,40 @@ function renderCardResult(result) {
   const data = result.result?.data;
   if (!data) { cardStatusMsg.textContent = "Nessun dato ricevuto."; return; }
 
+  // Campi reali dell'API esncard.org
+  const code = data["code"] || "";
+  const expirationRaw = data["expiration-date"] || "";
+  const status = data["status"] || "";
+  const sectionCode = data["section-code"] || "";
+  const activationRaw = data["activation date"] || "";
+  const tid = data["tid"] || "";
+
+  const expirationDate = parseDateValue(expirationRaw);
+  const activationDate = parseDateValue(activationRaw);
+
   const fields = [
-    ["Codice", data["card-code"] || data.code || data.card_code || ""],
-    ["Nome", [data["first-name"], data["last-name"]].filter(Boolean).join(" ") || data.name || ""],
-    ["Sezione", data["section-code"] || data.section || ""],
-    ["Valida fino", data["valid-until"] || data.valid_until || data["valid until"] || ""],
-    ["Stato", data.status || ""]
+    ["Codice", code],
+    ["Sezione", sectionCode],
+    ["Stato", status ? getCardStatusBadge(status) : "", true],
+    ["Valida fino", expirationDate ? formatDateTime(expirationDate) : expirationRaw],
+    ["Attivata il", activationDate ? formatDateTime(activationDate) : activationRaw],
+    ["TID", tid]
   ];
 
-  for (const [label, value] of fields) {
+  for (const [label, value, isHtml = false] of fields) {
     if (!value) continue;
     const div = document.createElement("div");
     div.className = "card-field";
-    div.innerHTML = `<span>${label}:</span><span>${value}</span>`;
+    if (isHtml) {
+      div.innerHTML = `<span>${label}:</span><span>${value}</span>`;
+    } else {
+      const labelEl = document.createElement("span");
+      const valueEl = document.createElement("span");
+      labelEl.textContent = `${label}:`;
+      valueEl.textContent = value;
+      div.appendChild(labelEl);
+      div.appendChild(valueEl);
+    }
     cardResult.appendChild(div);
   }
   cardResult.classList.add("visible");

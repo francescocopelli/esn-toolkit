@@ -415,9 +415,17 @@ async function checkCard(code) {
     if (outcome.parseError) {
       return { ok: false, result: { status: outcome.status, raw: outcome.raw }, error: `Risposta non JSON valida: ${outcome.parseError}` };
     }
+
+    // La risposta è un array — estrai il primo elemento
+    const json = outcome.json;
+    const cardData = Array.isArray(json) ? json[0] : json;
+    if (!cardData) {
+      return { ok: false, result: { status: outcome.status, raw: outcome.raw }, error: "ESNcard non trovata o non valida." };
+    }
+
     return {
       ok: true,
-      result: { status: outcome.status, data: outcome.json, raw: outcome.raw, requestUrl: url },
+      result: { status: outcome.status, data: cardData, raw: outcome.raw, requestUrl: url },
       error: null
     };
   } catch (error) {
